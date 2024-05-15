@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/github/license/libitx/handkit?color=informational)
 ![Build Status](https://img.shields.io/github/workflow/status/libitx/handkit/Elixir%20CI)
 
-Handkit is an Elixir client for the [Handcash Connect API](https://handcash.dev).
+Handkit is an Elixir client for the [Handcash Connect API](https://handcash.io/developers/connect).
 
 Handkit offers 100% coverage of the Handcash Connect APIs, so you can build
 blazing fast Bitcoin apps with Elixir in hours.
@@ -38,13 +38,13 @@ end
 ```
 
 You will need to register your application using the Handcash
-[developer dashboard](https://dashboard.handcash.dev) and make a note of your
+[developer dashboard](https://dashboard.handcash.io) and make a note of your
 app's **app ID**.
 
 ## User authorization
 
 Familiarize yourself with the Handcash Connect
-[user authorization flow](https://docs.handcash.dev/authorization/).
+[user authorization flow](https://docs.handcash.io/docs/user-authentication-overview).
 
 Within your Elixir app, use Handkit to generate a redirection URL and present
 a button in your app's UI for users to click and grant your app's permissions.
