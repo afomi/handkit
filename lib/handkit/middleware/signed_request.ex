@@ -18,6 +18,9 @@ defmodule Handkit.Middleware.SignedRequest do
       {"oauth-publickey", Curvy.Key.to_pubkey(key) |> Base.encode16(case: :lower)},
       {"oauth-signature", get_request_sig(env, timestamp, key)},
       {"oauth-timestamp", timestamp},
+      {"app-id", Application.get_env(:handkit, :api_key)},
+      {"app-secret", Application.get_env(:handkit, :api_secret)},
+      {"consumer", "handkit"}
     ]
 
     env

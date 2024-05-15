@@ -41,6 +41,16 @@ You will need to register your application using the Handcash
 [developer dashboard](https://dashboard.handcash.io) and make a note of your
 app's **app ID**.
 
+## App configuration
+
+In your Elixir app's `config.exs` set your Handcash app's key and secret.
+
+```elixir
+config :handkit,
+  api_key: "YOUR-HANDCASH-API-KEY-HERE",
+  api_secret: "YOUR-HANDCASH-API-SECRET-HERE"
+```
+
 ## User authorization
 
 Familiarize yourself with the Handcash Connect
