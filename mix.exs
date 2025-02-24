@@ -35,12 +35,12 @@ defmodule Handkit.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:bsv, "~> 2.0"},
+      {:bsv, "~> 2.1"},
       {:curvy, "~> 0.3"},
-      {:ex_doc, "~> 0.26", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.32.0", only: :dev, runtime: false},
       {:inflex, "~> 2.0"},
-      {:jason, "~> 1.2"},
-      {:tesla, "~> 1.4"}
+      {:jason, "~> 1.4.4"},
+      {:tesla, "~> 1.14.1"}
     ]
   end
 end
