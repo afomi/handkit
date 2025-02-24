@@ -39,8 +39,8 @@ defmodule Handkit.MixProject do
       {:curvy, "~> 0.3"},
       {:ex_doc, "~> 0.32.0", only: :dev, runtime: false},
       {:inflex, "~> 2.0"},
-      {:jason, "~> 1.4"},
-      {:tesla, "~> 1.9"}
+      {:jason, "~> 1.4.4"},
+      {:tesla, "~> 1.14.1"}
     ]
   end
 end
