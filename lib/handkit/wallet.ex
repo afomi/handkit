@@ -8,6 +8,7 @@ defmodule Handkit.Wallet do
   alias Handkit.Connect
 
   @endpoint "/v1/connect/wallet"
+  @v3_endpoint "/v3"
 
   @doc """
   Returns the exchange rate of the given currency code.
@@ -27,7 +28,7 @@ defmodule Handkit.Wallet do
   @spec get_exchange_rate(Connect.t, String.t) :: {:ok, map} | {:error, any}
   def get_exchange_rate(%Connect{client: client} = _client, currency \\ "USD") do
     client
-    |> Tesla.get(@endpoint <> "/exchangeRate/#{ currency }")
+    |> Tesla.get(@endpoint <> "/exchangeRate/#{currency}")
     |> Connect.handle_result()
   end
 
@@ -174,5 +175,88 @@ defmodule Handkit.Wallet do
     do: {:receivers, value}
 
   defp rename_payments_key(pair), do: pair
+
+  # iex> payment_request_params = %{
+  #     ...>   app_action: "test",
+  #     ...>   attachment: %{
+  #     ...>     format: "json",
+  #     ...>     value: %{foo: "testing"}
+  #     ...>   },
+  #     ...>   description: "testing testing...",
+  #     ...>   payments: [%{
+  #     ...>     amount: 5,
+  #     ...>     currency_code: "DUR",
+  #     ...>     to: "Libs"
+  #     ...>   }]
+  #     ...> }
+
+  #  %{
+  #     "product" => %{
+  #       "name" => "Legendary Sword",
+  #       "description" => "A sword made of lightning",
+  #       "imageUrl" => "https://example.com/sword-image.jpg"
+  #     },
+  #     "receivers" => [
+  #       %{
+  #         "sendAmount" => 0.01,
+  #         "destination" => "myBusinessWalletId"
+  #       }
+  #     ],
+  #     "requestedUserData" => ["paymail"],
+  #     "notifications" => %{
+  #       "webhook" => %{
+  #         "customParameters" => %{
+  #           "gameId" => "199491921"
+  #         },
+  #         "webhookUrl" => "https://myappdomain.com/handcash/webhook"
+  #       },
+  #       "email" => "payments@handcash.io"
+  #     },
+  #     "currencyCode" => "BSV",
+  #     "denominatedIn" => "USD",
+  #     "expirationType" => "limit",
+  #     "totalUnits" => 5,
+  #     "expirationInSeconds" => 604800,
+  #     "redirectUrl" =>
+  #       "https://example.com/647a2e8e84940994f6aeb634?collectionId=659ddbeef30153e01217307e&sortBy=price&order=asc&page=1"
+  #   }
+
+  def get_payment_requests(%Connect{client: client} = _client) do
+    client
+    |> Tesla.get(@v3_endpoint <> "/paymentRequests")
+    |> Connect.handle_result()
+  end
+
+  # client |> Handkit.Wallet.create_payment_request(paymentRequestParams)
+  def create_payment_request(%Connect{client: client} = _client, %{} = params) do
+    client
+      |> Tesla.post(@v3_endpoint <> "/paymentRequests", params)
+      |> Connect.handle_result()
+  end
+
+  # client |> Handkit.Wallet.get_payment_request(payment_request_id, updatedPaymentRequestParams)
+  def edit_payment_request(%Connect{client: client} = _client, payment_request_id, %{} = params) do
+    client
+      |> Tesla.put(@v3_endpoint <> "/paymentRequests/#{payment_request_id}", params)
+      |> Connect.handle_result()
+  end
+
+  # client |> Handkit.Wallet.delete_payment_request(payment_request_id)
+  def delete_payment_request(%Connect{client: client} = _client, payment_request_id) do
+    client
+      |> Tesla.delete(@v3_endpoint <> "/paymentRequests/#{payment_request_id}")
+      |> Connect.handle_result()
+  end
+
+  # COLLECTION
+  # {
+  #   name: 'HandCash Team Caricatures',
+  #   description: 'A unique collection of caricatures of the HandCash team',
+  #   mediaDetails: {
+  #     image: {
+  #       url: 'https://res.cloudinary.com/handcash-iae/image/upload/v1685141160/round-handcash-logo_cj47fp_xnteyo_oy3nbd.png',
+  #       contentType: 'image/png',
+  #     },
+  #   },
 
 end
