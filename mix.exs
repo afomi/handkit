@@ -5,7 +5,7 @@ defmodule Handkit.MixProject do
     [
       app: :handkit,
       version: "0.2.0",
-      elixir: "~> 1.11",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Handkit",
@@ -38,7 +38,7 @@ defmodule Handkit.MixProject do
       {:bsv, "~> 2.1"},
       {:curvy, "~> 0.3"},
       {:ex_doc, "~> 0.32.0", only: :dev, runtime: false},
-      {:inflex, "~> 2.1", github: "noizu/inflex", branch: "master"},
+      {:inflex, path: "/Users/ryan/workspace/inflex"},
       {:jason, "~> 1.4.4"},
       {:tesla, "~> 1.14.1"}
     ]
