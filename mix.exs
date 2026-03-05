@@ -37,10 +37,10 @@ defmodule Handkit.MixProject do
     [
       {:bsv, "~> 2.1"},
       {:curvy, "~> 0.3"},
-      {:ex_doc, "~> 0.32.0", only: :dev, runtime: false},
-      {:inflex, "~> 2.1", github: "noizu/inflex", branch: "master"},
+      {:ex_doc, "~> 0.40.1", only: :dev, runtime: false},
+      {:inflex, github: "afomi/inflex", branch: "elixir-1.18"},
       {:jason, "~> 1.4.4"},
-      {:tesla, "~> 1.14.1"}
+      {:tesla, "~> 1.16.0"}
     ]
   end
 end
